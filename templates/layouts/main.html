@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- load stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome-4.6.3/css/font-awesome.min.css') }}">            <!-- Font awesome -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">                                  <!-- Bootstrap style -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hero-slider-style.css') }}">                              <!-- Hero slider style (https://codyhouse.co/gem/hero-slider/) -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/magnific-popup.css') }}">                                 <!-- Magnific popup style (http://dimsemenov.com/plugins/magnific-popup/) -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">                                 <!-- Magnific popup style (http://dimsemenov.com/plugins/magnific-popup/) -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/templatemo-style.css') }}">
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <!-- Content -->
+        <div class="cd-hero">
+<!-- Navigation -->
+            <div class="cd-slider-nav">
+                <nav class="navbar">
+                    <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#tmNavbar">
+                        &#9776;
+                    </button>
+                    <div class="collapse navbar-toggleable-sm text-xs-center text-uppercase tm-navbar nav navbar-nav">
+                        <a class="nav-link" href="/" data-no="1">Main</a>
+                        <a class="nav-link" href="/processing" data-no="2">Processing </a>
+                        <a class="nav-link" href="/face" data-no="2">Face Detection </a>
+                        <a class="nav-link" href="/age" data-no="2">Age Detection </a>
+                        <a class="nav-link" href="/parts" data-no="2">Parts Detection </a>
+                        <a class="nav-link" href="/gallery" data-no="3">Gallery </a>
+                        <a class="nav-link" href="/about" data-no="4">About</a>
+                    </div>
+                </nav>
+            </div>
+            <ul class="cd-hero-slider">  <!-- autoplay -->
+                {% block content %}{% endblock %} </ul> <!-- .cd-hero-slider -->
+            <footer class="tm-footer">
+                <div class="tm-social-icons-container">
+                    <a href="#" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="tm-social-link"><i class="fa fa-google-plus"></i></a>
+                    <a href="#" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="tm-social-link"><i class="fa fa-behance"></i></a>
+                    <a href="#" class="tm-social-link"><i class="fa fa-linkedin"></i></a>
+                </div>
+            </footer>
+        </div> <!-- .cd-hero -->
+        <!-- Preloader, https://ihatetomatoes.net/create-custom-preloading-screen/ -->
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
+        <!-- load JS files -->
+        <script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>         <!-- jQuery (https://jquery.com/download/) -->
+        <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script> <!-- Tether for Bootstrap (http://stackoverflow.com/questions/34567939/how-to-fix-the-error-error-bootstrap-tooltips-require-tether-http-github-h) -->
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>             <!-- Bootstrap js (v4-alpha.getbootstrap.com/) -->
+        <script src="{{ url_for('static', filename='js/hero-slider-main.js') }}"></script>          <!-- Hero slider (https://codyhouse.co/gem/hero-slider/) -->
+        <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script> <!-- Magnific popup (http://dimsemenov.com/plugins/magnific-popup/) -->
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/dropzone.js') }}"></script>
+        <script>
+            function adjustHeightOfPage(pageNo) {
+
+                // Get the page height
+                var totalPageHeight = 15 + $('.cd-slider-nav').height()
+                                        + $(".cd-hero-slider li:nth-of-type(" + pageNo + ") .js-tm-page-content").height() + 160
+                                        + $('.tm-footer').height();
+
+                // Adjust layout based on page height and window height
+                if(totalPageHeight > $(window).height())
+                {
+                    $('.cd-hero-slider').addClass('small-screen');
+                    $('.cd-hero-slider li:nth-of-type(' + pageNo + ')').css("min-height", totalPageHeight + "px");
+                }
+                else
+                {
+                    $('.cd-hero-slider').removeClass('small-screen');
+                    $('.cd-hero-slider li:nth-of-type(' + pageNo + ')').css("min-height", "100%");
+                }
+
+            }
+
+            /*
+                Everything is loaded including images.
+            */
+            $(window).load(function(){
+
+                adjustHeightOfPage(1); // Adjust page height
+
+                /* Gallery pop up
+                -----------------------------------------*/
+                $('.tm-img-gallery').magnificPopup({
+                    delegate: 'a', // child items selector, by clicking on it popup will open
+                    type: 'image',
+                    gallery:{enabled:true}
+                });
+
+                /* Collapse menu after click
+                -----------------------------------------*/
+                $('#tmNavbar a').click(function(){
+                    $('#tmNavbar').collapse('hide');
+
+                    adjustHeightOfPage($(this).data("no")); // Adjust page height
+                });
+
+                /* Browser resized
+                -----------------------------------------*/
+                $( window ).resize(function() {
+                    var currentPageNo = $(".cd-hero-slider li.selected .js-tm-page-content").data("page-no");
+                    adjustHeightOfPage( currentPageNo );
+                });
+
+                // Remove preloader
+                // https://ihatetomatoes.net/create-custom-preloading-screen/
+                $('body').addClass('loaded');
+
+            });
+
+        </script>
+</body>
+</html>

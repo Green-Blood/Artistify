@@ -1,0 +1,36 @@
+{% extends "./layouts/main.html" %}
+{% block title %}Artistify{% endblock %}
+{% block content %}
+<li class="selected">
+    <div class="cd-full-width">
+        <div class="container-fluid js-tm-page-content tm-page-1" data-page-no="1">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% if image != None:%}
+                    <div class="img-block mt-2">
+                        {% if image != None or image == "":%}
+                        <img width="400px" height="400px" src="{{ url_for('static', filename='images/') }}{{image}}">
+                        {% else %}
+                        <img src="{{ url_for('static', filename='images/noimage.png') }}">
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    <h2 class="tm-site-name">Artistify</h2>
+                    <div class="tm-bg-white-translucent text-xs-left tm-textbox tm-textbox-1-col">
+                        <p class="tm-text-title"> Choose the photo </p>
+                        <form action="/image" class="btn-secondary" method="post" enctype=multipart/form-data> <input type="file" name="file" />
+                            <button class="btn btn-success " type="submit">upload</button>
+                        </form>
+                        {% if error %}
+                        <h4 class="text-danger">{{error}} </h4>
+                        {% endif %}
+                        <p class="tm-text">This is the application to make apply some image processing techniques for Multimedia Computing course</p>
+                        <p class="tm-text">Here you can find image processing techniques such as blur, grayscale and etc.</p>
+                        <p class="tm-text">Also some ML techniques to understand the quantity of faces in the image and gender with age</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .cd-full-width -->
+</li>
+{% endblock%}

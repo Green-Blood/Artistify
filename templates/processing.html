@@ -1,0 +1,46 @@
+{% extends "./layouts/main.html" %}
+{% block title %}Processing page{% endblock %}
+{% block content %}
+<li class="selected ">
+    <div class="cd-full-width">
+        <div class="container-fluid js-tm-page-content" data-page-no="2">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="tm-2-col-container">
+                        <div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox">
+                            <h2 class="tm-text-title">Before Processing </h2>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p class="tm-text" >  Choose any processing technique </p>
+                                    <p>{{error}}</p>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="w-100  ">
+                                    <img class="uploaded-image  "  src="{{ url_for('static', filename='images/') }}{{image}}">
+                                </div>
+                                {% for item in items: %}
+                                <div class=" w-100">
+                                    <div class="col-sm-6">
+                                        <button  class=" upload-button btn btn-info waves-effect waves-light btn-lg processing w-100" data-url="processing"
+                                                            data-id="{{item.id}}">
+                                            {{item.title}}
+                                        </button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox">
+                            <h2 class="tm-text-title">After Processing</h2>
+                            <p class="tm-text" > Here you can see processed image </p>
+                            <p class="tm-text">
+                            <div class="uploaded-image" id="image"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .cd-full-width -->
+</li>
+{% endblock %}
