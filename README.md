@@ -1,5 +1,15 @@
 # Artistify
-OpenCV project for Multimedia Computing course
+OpenCV project for Multimedia Computing course. 
+
+## Overview
+The world is becoming more and more near to true Artificial Intelligence, having an ability to understand who is the person, his age, gender and etc. Can give a huge amount of benefits to social interactions and law enhancement.
+To understand the concept the Flask web application was created with the following endorsements:
+1. Image processing techniques
+2. Number of faces detection
+3. Age and gender detection
+4. Face parts detection
+
+
 
 ## Used frameworks
 1. `OpenCV`
