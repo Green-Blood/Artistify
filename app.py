@@ -1,11 +1,11 @@
 # import the necessary packages
 from flask import Flask, render_template, redirect, request, jsonify, url_for
 from flask_cors import CORS
-from image_logic import ImageLogic
-from enhancement import *
-from face_detection import Face
-from age import Age
-from parts_detection import *
+from classes.image_logic import ImageLogic
+from classes.enhancement import *
+from classes.face_detection import Face
+from classes.age import Age
+from classes.parts_detection import *
 import numpy as np
 import logging
 import base64
